@@ -130,5 +130,28 @@ namespace UnitTestProject
                 Debug.WriteLine("---");
             }
         }
+
+        [TestMethod]
+        public void Test_ApiScoresBest()
+        {
+            const string name = "peppy";
+            const int id = 2;
+
+            List<Score> scores1 = OsuApi.GetScoresBest(name);
+            List<Score> scores2 = OsuApi.GetScoresBest(id);
+
+            Assert.AreEqual(scores1.Count, scores2.Count);
+            for (int i = 0; i < scores1.Count; i++)
+                Assert.AreEqual(scores1[i], scores2[i]);
+
+            Debug.WriteLine("Amount: " + scores1.Count);
+
+            Debug.WriteLine("");
+            foreach (Score score in scores1)
+            {
+                HelperMethods.WriteEverything(score);
+                Debug.WriteLine("---");
+            }
+        }
     }
 }
