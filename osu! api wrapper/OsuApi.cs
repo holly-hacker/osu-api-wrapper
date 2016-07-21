@@ -120,11 +120,35 @@ namespace osu_api_wrapper
             if (limit != -1) nvc.Add("limit", limit.ToString());
 
             foreach (string s in nvc)
-            {
                 Debug.WriteLine(s + " : " + (s == "k" ? "-snip-" : nvc[s]));
-            }
 
             string str = UploadValues("get_user_best", nvc);
+            Debug.WriteLine("response: " + str);
+            List<Score> users = JsonConvert.DeserializeObject<List<Score>>(str);
+            return users;
+        }
+
+
+        public static List<Score> GetScoresRecent(string user, bool? isId = null, GameMode? mode = null, int limit = -1)
+            => GetScoresRecentInternal(user, mode, isId, limit);
+        public static List<Score> GetScoresRecent(int userId, GameMode? mode = null, int limit = -1)
+            => GetScoresRecentInternal(userId.ToString(), mode, true, limit);
+
+        private static List<Score> GetScoresRecentInternal(string user, GameMode? mode, bool? userTypeIsId, int limit = -1)
+        {
+            if (string.IsNullOrEmpty(ApiKey)) throw new ApiKeyMissingException();
+
+            NameValueCollection nvc = new NameValueCollection { { "k", ApiKey } };
+
+            nvc.Add("u", user);
+            if (mode != null) nvc.Add("m", ((int)mode).ToString());
+            if (userTypeIsId != null) nvc.Add("type", (bool)userTypeIsId ? "id" : "string");
+            if (limit != -1) nvc.Add("limit", limit.ToString());
+
+            foreach (string s in nvc)
+                Debug.WriteLine(s + " : " + (s == "k" ? "-snip-" : nvc[s]));
+
+            string str = UploadValues("get_user_recent", nvc);
             Debug.WriteLine("response: " + str);
             List<Score> users = JsonConvert.DeserializeObject<List<Score>>(str);
             return users;

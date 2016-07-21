@@ -153,5 +153,28 @@ namespace UnitTestProject
                 Debug.WriteLine("---");
             }
         }
+
+        [TestMethod]
+        public void Test_ApiScoresRecent()
+        {
+            const string name = "peppy";//"Rafis";
+            const int id = 2;//2558286;
+
+            List<Score> scores1 = OsuApi.GetScoresRecent(name, false, GameMode.Standard, 20);
+            List<Score> scores2 = OsuApi.GetScoresRecent(id, GameMode.Standard, 20);
+
+            Assert.AreEqual(scores1.Count, scores2.Count);
+            for (int i = 0; i < scores1.Count; i++)
+                Assert.AreEqual(scores1[i], scores2[i]);
+
+            Debug.WriteLine("Amount: " + scores1.Count);
+
+            Debug.WriteLine("");
+            foreach (Score score in scores1)
+            {
+                HelperMethods.WriteEverything(score);
+                Debug.WriteLine("---");
+            }
+        }
     }
 }
