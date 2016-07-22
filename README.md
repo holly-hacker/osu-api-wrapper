@@ -1,9 +1,14 @@
 # osu-api-wrapper
 A small osu!api wrapper in C#
 
-Currently not finished, this readme file will be filled once it is!
+## Description
+This project is meant to be a minimalistic wrapper for the osu! api. It uses Newtonsoft's Json.NET library for parsing the json responses, and besides parsing does no other processing.
 
-Left to do:
+You are free to use this code in your project (both as DLL or by adding it to your source code), and you are free to edit it as you like. If you use this, giving me credit is very much appreciated!
+
+### Left to do:
 * Proper documentation
-* Some extension methods, especially for Mods
-* Clean up code
+
+
+### Example usage
+See [Tests.cs](https://github.com/HoLLy-HaCKeR/osu-api-wrapper/blob/master/UnitTestProject/Tests.cs).
