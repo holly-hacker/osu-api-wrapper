@@ -155,15 +155,16 @@ namespace osu_api_wrapper
         }
 
 
-        public static List<MultiplayerMatch> GetMultiplayerMatch(int matchId)   //TODO: check if this works
+        public static MultiplayerMatch GetMultiplayerMatch(int matchId)   //TODO: check if this works
         {
             if (string.IsNullOrEmpty(ApiKey)) throw new ApiKeyMissingException();
 
             NameValueCollection nvc = new NameValueCollection { { "k", ApiKey } };
             nvc.Add("mp", matchId.ToString());
 
-            string str = UploadValues("get_user_recent", nvc);
-            List<MultiplayerMatch> users = JsonConvert.DeserializeObject<List<MultiplayerMatch>>(str);
+            string str = UploadValues("get_match", nvc);
+            Debug.WriteLine("response: " + str);
+            MultiplayerMatch users = JsonConvert.DeserializeObject<MultiplayerMatch>(str);
             return users;
         }
 

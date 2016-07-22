@@ -180,18 +180,11 @@ namespace UnitTestProject
         [TestMethod]
         public void Test_ApiMultiplayerMatch()
         {
-            const int id = 1936471;
+            const int id = 26498374;
 
-            List<MultiplayerMatch> matches = OsuApi.GetMultiplayerMatch(id);
-
-            Assert.AreNotEqual(matches.Count, 0, "No matches found!");
-
-            Debug.WriteLine("");
-            foreach (var match in matches)
-            {
-                HelperMethods.WriteEverything(match);
-                Debug.WriteLine("---");
-            }
+            MultiplayerMatch matches = OsuApi.GetMultiplayerMatch(id);
+            
+            HelperMethods.WriteEverything(matches);
         }
 
         [TestMethod]

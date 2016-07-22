@@ -12,7 +12,8 @@ namespace osu_api_wrapper.Classes
     {
         public byte match_type;     //not documented
         public int game_id, beatmap_id;
-        public DateTime start_time, end_time;
+        public DateTime start_time;
+        public DateTime? end_time;
         public GameMode play_mode;
         public Mods mods;
         public ScoringType scoring_type;
