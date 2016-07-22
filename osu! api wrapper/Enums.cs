@@ -83,4 +83,27 @@
         Key3 = 134217728,
         Key2 = 268435456
     }
+
+    public enum ScoringType : byte
+    {
+        Score = 0,
+        Accuracy = 1,
+        Combo = 2,
+        //TODO: check for scorev2
+    }
+
+    public enum TeamType : byte
+    {
+        HeadToHead = 0,
+        TagCoop = 1,
+        TeamVs = 2,
+        TagTeam = 3
+    }
+
+    public enum Team : byte
+    {
+        NoTeam = 0,
+        Blue = 1,
+        Red = 2
+    }
 }

@@ -155,6 +155,32 @@ namespace osu_api_wrapper
         }
 
 
+        public static List<MultiplayerMatch> GetMultiplayerMatch(int matchId)   //TODO: check if this works
+        {
+            if (string.IsNullOrEmpty(ApiKey)) throw new ApiKeyMissingException();
+
+            NameValueCollection nvc = new NameValueCollection { { "k", ApiKey } };
+            nvc.Add("mp", matchId.ToString());
+
+            string str = UploadValues("get_user_recent", nvc);
+            List<MultiplayerMatch> users = JsonConvert.DeserializeObject<List<MultiplayerMatch>>(str);
+            return users;
+        }
+
+        public static byte[] GetReplay(string user, int beatmapId, GameMode mode)   //TODO: check if this works
+        {
+            if (string.IsNullOrEmpty(ApiKey)) throw new ApiKeyMissingException();
+
+            NameValueCollection nvc = new NameValueCollection { { "k", ApiKey } };
+            nvc.Add("m", ((int)mode).ToString());
+            nvc.Add("b", beatmapId.ToString());
+            nvc.Add("u", user);
+
+            string str = UploadValues("get_replay", nvc);
+            Tuple<string, string> users = JsonConvert.DeserializeObject<Tuple<string, string>>(str);
+            return Convert.FromBase64String(users.Item2);
+        }
+
         private static string UploadValues(string apiName, NameValueCollection nvc)
         {
             return new WebClient().DownloadString(ApiUrl + apiName + nvc.ToQueryString());  //GET

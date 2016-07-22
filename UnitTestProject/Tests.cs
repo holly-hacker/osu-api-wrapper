@@ -176,5 +176,24 @@ namespace UnitTestProject
                 Debug.WriteLine("---");
             }
         }
+
+        [TestMethod]
+        public void Test_ApiMultiplayerMatch()
+        {
+            const int id = 1936471;
+
+            List<MultiplayerMatch> matches = OsuApi.GetMultiplayerMatch(id);
+
+            Assert.AreNotEqual(matches.Count, 0, "No matches found!");
+
+            Debug.WriteLine("");
+            foreach (var match in matches)
+            {
+                HelperMethods.WriteEverything(match);
+                Debug.WriteLine("---");
+            }
+        }
+
+        //TODO: implement test for /api/get_replay
     }
 }

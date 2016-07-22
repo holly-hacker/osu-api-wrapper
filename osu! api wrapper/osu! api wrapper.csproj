@@ -47,6 +47,10 @@
   <ItemGroup>
     <Compile Include="ApiKeyMissingException.cs" />
     <Compile Include="Classes\Beatmap.cs" />
+    <Compile Include="Classes\MultiplayerMatch.cs" />
+    <Compile Include="Classes\MultiplayerMatchGame.cs" />
+    <Compile Include="Classes\MultiplayerMatchGameScore.cs" />
+    <Compile Include="Classes\MultiplayerMatchInfo.cs" />
     <Compile Include="Classes\PlayerEvent.cs" />
     <Compile Include="Classes\Score.cs" />
     <Compile Include="Classes\User.cs" />
