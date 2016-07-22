@@ -194,6 +194,16 @@ namespace UnitTestProject
             }
         }
 
-        //TODO: implement test for /api/get_replay
+        [TestMethod]
+        public void Test_ApiReplay()
+        {
+            const int beatmapId = 658127;
+            const string playerName = "cookiezi";
+
+            byte[] bytes = OsuApi.GetReplay(playerName, beatmapId, GameMode.Standard);
+
+            Assert.AreNotEqual(bytes.Length, 0);
+            Debug.WriteLine("Bytes length: " + bytes.Length);
+        }
     }
 }

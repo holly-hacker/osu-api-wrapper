@@ -167,7 +167,7 @@ namespace osu_api_wrapper
             return users;
         }
 
-        public static byte[] GetReplay(string user, int beatmapId, GameMode mode)   //TODO: check if this works
+        public static byte[] GetReplay(string user, int beatmapId, GameMode mode)
         {
             if (string.IsNullOrEmpty(ApiKey)) throw new ApiKeyMissingException();
 
@@ -177,8 +177,10 @@ namespace osu_api_wrapper
             nvc.Add("u", user);
 
             string str = UploadValues("get_replay", nvc);
-            Tuple<string, string> users = JsonConvert.DeserializeObject<Tuple<string, string>>(str);
-            return Convert.FromBase64String(users.Item2);
+            Debug.WriteLine("Response length: " + str.Length);
+            Dictionary<string, string> users = JsonConvert.DeserializeObject<Dictionary<string, string>>(str);
+            Debug.WriteLine("item2 length: " + users["content"].Length);
+            return Convert.FromBase64String(users["content"]);
         }
 
         private static string UploadValues(string apiName, NameValueCollection nvc)
