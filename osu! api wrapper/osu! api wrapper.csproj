@@ -58,6 +58,7 @@
     <Compile Include="OsuApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="PublicExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

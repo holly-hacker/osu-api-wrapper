@@ -14,8 +14,8 @@ namespace osu_api_wrapper
         /// Your 40-character api key
         /// </summary>
         public static string ApiKey;
-
         private const string ApiUrl = "https://osu.ppy.sh/api/";
+
 
         public static List<Beatmap> GetBeatmapsFromCreator(string user, bool? isId = null, GameMode? mode = null, bool? includeConverts = null, int limit = -1) 
             => GetBeatmapsInternal(null, -1, -1, user, isId, mode, includeConverts, null, limit);
@@ -92,12 +92,7 @@ namespace osu_api_wrapper
             if (userTypeIsId != null)           nvc.Add("type", (bool)userTypeIsId ? "id" : "string");
             if (limit != -1)                    nvc.Add("limit", limit.ToString());
 
-            foreach (string s in nvc) {
-                Debug.WriteLine(s + " : " + (s=="k" ? "-snip-" : nvc[s]));
-            }
-
             string str = UploadValues("get_scores", nvc);
-            Debug.WriteLine("response: " + str);
             List<Score> users = JsonConvert.DeserializeObject<List<Score>>(str);
             return users;
         }
@@ -119,11 +114,7 @@ namespace osu_api_wrapper
             if (userTypeIsId != null) nvc.Add("type", (bool)userTypeIsId ? "id" : "string");
             if (limit != -1) nvc.Add("limit", limit.ToString());
 
-            foreach (string s in nvc)
-                Debug.WriteLine(s + " : " + (s == "k" ? "-snip-" : nvc[s]));
-
             string str = UploadValues("get_user_best", nvc);
-            Debug.WriteLine("response: " + str);
             List<Score> users = JsonConvert.DeserializeObject<List<Score>>(str);
             return users;
         }
@@ -145,17 +136,13 @@ namespace osu_api_wrapper
             if (userTypeIsId != null) nvc.Add("type", (bool)userTypeIsId ? "id" : "string");
             if (limit != -1) nvc.Add("limit", limit.ToString());
 
-            foreach (string s in nvc)
-                Debug.WriteLine(s + " : " + (s == "k" ? "-snip-" : nvc[s]));
-
             string str = UploadValues("get_user_recent", nvc);
-            Debug.WriteLine("response: " + str);
             List<Score> users = JsonConvert.DeserializeObject<List<Score>>(str);
             return users;
         }
 
 
-        public static MultiplayerMatch GetMultiplayerMatch(int matchId)   //TODO: check if this works
+        public static MultiplayerMatch GetMultiplayerMatch(int matchId)
         {
             if (string.IsNullOrEmpty(ApiKey)) throw new ApiKeyMissingException();
 
@@ -163,7 +150,6 @@ namespace osu_api_wrapper
             nvc.Add("mp", matchId.ToString());
 
             string str = UploadValues("get_match", nvc);
-            Debug.WriteLine("response: " + str);
             MultiplayerMatch users = JsonConvert.DeserializeObject<MultiplayerMatch>(str);
             return users;
         }
@@ -178,9 +164,7 @@ namespace osu_api_wrapper
             nvc.Add("u", user);
 
             string str = UploadValues("get_replay", nvc);
-            Debug.WriteLine("Response length: " + str.Length);
             Dictionary<string, string> users = JsonConvert.DeserializeObject<Dictionary<string, string>>(str);
-            Debug.WriteLine("item2 length: " + users["content"].Length);
             return Convert.FromBase64String(users["content"]);
         }
 
